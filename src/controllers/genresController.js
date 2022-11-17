@@ -5,12 +5,39 @@ const sequelize = db.sequelize;
 const genresController = {
     'list': async (req, res) => {
            try {
-            let genres = await db.Genre.findAll({
-                order : ['name']
+            let {order} = req.query;
+            let orders = ['name','ranking'];
+            
+            if(orders.includes(order)){
+                order = order ? order : 'id';
+            }else{
+                throw new Error(`El campo ${order} no existe. Campos admitidos: name, ranking`);
+            }
+                let genres = await db.Genre.findAll({
+                order : [order],
+                attributes : {
+                    exclude : ['created_at','updated_at']
+                }
             })
+              if(genres.length){
+                return res.status(200).json({
+                    ok : true,
+                    meta : {
+                      total : genres.length
+                    },
+                    data : genres
+                 })
+            }
+            throw new Error(
+             'hubo un error'
+            )
            } catch (err) {
             console.log(err)
-           }
+            return res.status(500).json ({ 
+                ok:false,
+                msg : err.message ? err.message : 'comuniquese con el administrador'
+            })
+           }  
     },
         // db.Genre.findAll()
         //     .then(genres => {
