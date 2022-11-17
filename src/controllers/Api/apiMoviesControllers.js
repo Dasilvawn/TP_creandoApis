@@ -62,7 +62,7 @@ const apiMoviesController = {
                     data : genre
                  })
             }
-            throw new Error ('no existe el género')
+            throw new Error ('no existe la película')
 
         } catch (err) {
             console.log(err);

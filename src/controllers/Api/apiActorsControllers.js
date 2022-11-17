@@ -58,7 +58,7 @@ const apiGenresController = {
                     data : genre
                  })
             }
-            throw new Error ('no existe el género')
+            throw new Error ('no existe el actor')
 
         } catch (err) {
             console.log(err);
