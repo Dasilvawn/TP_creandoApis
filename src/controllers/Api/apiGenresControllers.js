@@ -1,14 +1,14 @@
 const db = require('../../database/models');
 const sequelize = db.sequelize;
 
-
 const apiGenresController = {
     
-    'list': async (req, res) => {
+    'list': async (req, res) => {   
+
            try {
             let {order} = req.query;
             let orders = ['name','ranking'];
-            
+                      
             if(orders.includes(order)){
                 order = order ? order : 'id';
             }else{
