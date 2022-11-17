@@ -1,8 +1,12 @@
 const db = require('../../database/models');
 const sequelize = db.sequelize;
+const path = require('path');
+const { Op } = require("sequelize");
+const moment = require('moment');
 
 
-const apiGenresController = {
+
+const apiMoviesController = {
     
     'list': async (req, res) => {
            try {
@@ -14,19 +18,19 @@ const apiGenresController = {
             }else{
                 throw new Error(`El campo ${order} no existe. Campos admitidos: name, ranking`);
             }
-                let genres = await db.Genre.findAll({
+                let movies = await db.Genre.findAll({
                 order : [order],
                 attributes : {
                     exclude : ['created_at','updated_at']
                 }
             })
-              if(genres.length){
+              if(movies.length){
                 return res.status(200).json({
                     ok : true,
                     meta : {
-                      total : genres.length
+                      total : movies.length
                     },
-                    data : genres
+                    data : movies
                  })
             }
             throw new Error(
@@ -43,13 +47,13 @@ const apiGenresController = {
    
     'detail': async (req, res) => {
         try {
-            let genre = await db.Genre.findByPk(req.params.id, { 
+            let movie = await db.Genre.findByPk(req.params.id, { 
                 attributes : {
                     exclude : ['created_at','updated_at']
                 }
             });
 
-            if(genre){
+            if(movie){
                 return res.status(200).json({
                     ok : true,
                     meta : {
@@ -70,4 +74,4 @@ const apiGenresController = {
 },
 }
 
-module.exports = apiGenresController;
+module.exports = apiMoviesController;
