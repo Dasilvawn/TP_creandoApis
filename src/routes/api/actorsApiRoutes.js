@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const actorsController = require('../controllers/actorsController');
+const apiActorsControllers = require('../../controllers/Api/apiActorsControllers');
 
-router.get('/', actorsController.list);
-router.get('/detail/:id', actorsController.detail);
+// router.get('./', apiActorsControllers.list);
+// router.get('./detail/:id', apiActorsControllers.detail);
 
 
 module.exports = router;
