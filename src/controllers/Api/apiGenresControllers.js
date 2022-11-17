@@ -2,7 +2,7 @@ const db = require('../database/models');
 const sequelize = db.sequelize;
 
 
-const genresController = {
+const apiGenresController = {
     
     'list': async (req, res) => {
            try {
@@ -70,4 +70,4 @@ const genresController = {
 },
 }
 
-module.exports = genresController;
+module.exports = apiGenresController;
