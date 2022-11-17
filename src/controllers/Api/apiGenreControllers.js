@@ -3,6 +3,7 @@ const sequelize = db.sequelize;
 
 
 const genresController = {
+    
     'list': async (req, res) => {
            try {
             let {order} = req.query;
@@ -39,10 +40,6 @@ const genresController = {
             })
            }  
     },
-        // db.Genre.findAll()
-        //     .then(genres => {
-        //         res.render('genresList.ejs', {genres})
-        //     })
    
     'detail': async (req, res) => {
         try {
@@ -70,10 +67,6 @@ const genresController = {
                 msg : err.message ? err.message : 'comuniquese con el administrador' 
             })
         }
-        // db.Genre.findByPk(req.params.id)
-        //     .then(genre => {
-        //         res.render('genresDetail.ejs', {genre});
-        //     });
 },
 }
 
