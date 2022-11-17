@@ -32,7 +32,7 @@ const genresController = {
              'hubo un error'
             )
            } catch (err) {
-            console.log(err)
+            console.log(err);
             return res.status(500).json ({ 
                 ok:false,
                 msg : err.message ? err.message : 'comuniquese con el administrador'
@@ -44,13 +44,37 @@ const genresController = {
         //         res.render('genresList.ejs', {genres})
         //     })
    
-    'detail': (req, res) => {
-        db.Genre.findByPk(req.params.id)
-            .then(genre => {
-                res.render('genresDetail.ejs', {genre});
+    'detail': async (req, res) => {
+        try {
+            let genre = await db.Genre.findByPk(req.params.id, { 
+                attributes : {
+                    exclude : ['created_at','updated_at']
+                }
             });
-    }
 
+            if(genre){
+                return res.status(200).json({
+                    ok : true,
+                    meta : {
+                      status : 200
+                    },
+                    data : genre
+                 })
+            }
+            throw new Error ('no existe el género')
+
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json ({ 
+                ok:false,
+                msg : err.message ? err.message : 'comuniquese con el administrador' 
+            })
+        }
+        // db.Genre.findByPk(req.params.id)
+        //     .then(genre => {
+        //         res.render('genresDetail.ejs', {genre});
+        //     });
+},
 }
 
 module.exports = genresController;
