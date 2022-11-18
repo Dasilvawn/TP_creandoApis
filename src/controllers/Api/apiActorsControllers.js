@@ -1,11 +1,11 @@
 const db = require('../../database/models');
 const sequelize = db.sequelize;
 
-const apiGenresController = {
+const apiActorsController = {
 
     list: async (req, res) => {
         try {
-          const actors = await db.Genre.findAll({
+          const actors = await db.Actors.findAll({
             attributes: {
               exclude: ["created_at", "updated_at"],
             },
@@ -14,14 +14,14 @@ const apiGenresController = {
           res.status(200).json({
             meta: {
               status: 200,
-              total: genres.length,
+              total: actors.length,
               url: "/api/actors",
             },
-            data: genres,
+            data: actors,
           });
         } catch (error) {
           return res.status(500).json({
-            message: "Internal server error",
+            message: "comuniquese con el administrador",
           });
         }
     },
@@ -29,7 +29,7 @@ const apiGenresController = {
     'detail': async (req, res) => {
 
         try {
-            const genre = await db.Genre.findByPk(req.params.id, {
+            const actor = await db.Actor.findByPk(req.params.id, {
               attributes: {
                 exclude: ["created_at", "updated_at"],
               },
@@ -38,16 +38,16 @@ const apiGenresController = {
             res.status(200).json({
               meta: {
                 status: 200,
-                url: `/api/genres/${req.params.id}`,
+                url: `/api/actors/${req.params.id}`,
               },
-              data: genre,
+              data: actor,
             });
           } catch (error) {
             return res.status(500).json({
-              message: "Internal server error",
+              message: "comuniquese con el administrador",
             });
         }
 },
 }
 
-module.exports = apiGenresController;
+module.exports = apiActorsController;

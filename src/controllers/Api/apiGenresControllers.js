@@ -21,7 +21,7 @@ const apiGenresController = {
           });
         } catch (error) {
           return res.status(500).json({
-            message: "Internal server error",
+            message: "comuniquese con el administrador",
           });
         }
     },
@@ -44,7 +44,7 @@ const apiGenresController = {
             });
           } catch (error) {
             return res.status(500).json({
-              message: "Internal server error",
+              message: "comuniquese con el administrador",
             });
         }
 },
